@@ -10,6 +10,22 @@
   </head>
 
   <body>
+    <header>
+      <h1>logo</h1>
+        <% if customer_signed_in? %>
+          <ul><%= link_to"マイページ", customers_show_path %></ul>
+          <ul><%= link_to"商品一覧", items_index_path %></ul>
+          <ul><%= link_to"カート", cart_items_index_path %></ul>
+          <ul><%= link_to"ログアウト", destroy_customer_session_path, method: :delete %></li>
+        <% else %>
+          <ul><%= link_to"About", homes_about_path %></ul>
+          <ul><%= link_to"商品一覧", items_index_path %></ul>
+          <ul><%= link_to"新規登録", new_customer_registration_path %></ul>
+          <ul><%= link_to"ログイン", new_customer_session_path %></li>
+        <% end %>
+          
+    </header>
+    
     <%= yield %>
   </body>
 </html>
