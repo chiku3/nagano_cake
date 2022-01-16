@@ -13,15 +13,22 @@
     <header>
       <h1>logo</h1>
         <% if customer_signed_in? %>
-          <ul><%= link_to"マイページ", customers_show_path %></ul>
-          <ul><%= link_to"商品一覧", items_index_path %></ul>
-          <ul><%= link_to"カート", cart_items_index_path %></ul>
-          <ul><%= link_to"ログアウト", destroy_customer_session_path, method: :delete %></li>
+          <p>ようこそ、<%= current_customer.last_name %>さん！</p>
+          <ul><%= link_to"マイページ", customers_my_page_path %></ul>
+          <ul><%= link_to"商品一覧", items_path %></ul>
+          <ul><%= link_to"カート", cart_items_path %></ul>
+          <ul><%= link_to"ログアウト", destroy_customer_session_path, method: :delete %></ul>
+        <% elsif admin_signed_in? %>
+          <ul><%= link_to"商品一覧", admin_items_path %></ul>
+          <ul><%= link_to"会員一覧", admin_customers_path %></ul>
+          <ul><%= link_to"注文履歴一覧", admin_homes_top_path %></ul>
+          <ul><%= link_to"ジャンル一覧", admin_genres_path %></ul>
+          <ul><%= link_to"ログアウト", destroy_admin_session_path, method: :delete %></ul>
         <% else %>
           <ul><%= link_to"About", homes_about_path %></ul>
-          <ul><%= link_to"商品一覧", items_index_path %></ul>
+          <ul><%= link_to"商品一覧", items_path %></ul>
           <ul><%= link_to"新規登録", new_customer_registration_path %></ul>
-          <ul><%= link_to"ログイン", new_customer_session_path %></li>
+          <ul><%= link_to"ログイン", new_customer_session_path %></ul>
         <% end %>
           
     </header>
