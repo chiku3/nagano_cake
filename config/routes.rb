@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   get 'customers/my_page' => "customers#show"
   get 'customers/unsubscribe' => "customers#unsubscribe"
   get 'customers/withdraw' => "customers#withdraw"
-  
+
   resources :items, only:[:index, :show]
-  
+
   resources :cart_items, only:[:index, :update, :destroy, :create]
   get 'cart_items/destroy_all' => "cart_items#destroy_all"
 
@@ -24,11 +24,11 @@ Rails.application.routes.draw do
     resources :order_details,only:[:update]
     resources :customers,only:[:index, :show, :edit, :update]
     resources :genres,only:[:index, :create, :edit, :update]
-    resources :items,only:[:index, :new, :create, :show, :update]
+    resources :items,only:[:index, :new, :create, :show, :edit, :update]
     get 'homes/top' => "admin/homes"
   end
-  
-  
+
+
   devise_for :admin, controllers: {
     sessions:      'admin/sessions',
     passwords:     'admin/passwords',

@@ -19,7 +19,7 @@
 
   <div class="field">
     <%= f.label :genre,"ジャンル" %>
-    <%= f.text_field :genre %>
+    <%= f.collection_select(:genre_id, @genre, :id, :name) %>
   </div>
 
   <div class="field">
