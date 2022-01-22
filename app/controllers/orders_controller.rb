@@ -1,14 +1,18 @@
 class OrdersController < ApplicationController
   def new
+    @order = Order.new
+    @addresses = Address.all
   end
-
+  
   def confirm
+    @cart_items = CartItem.all
+    @order = Order.new(order_params)
+  end
+  
+  def create
   end
 
   def complete
-  end
-
-  def create
   end
 
   def index
