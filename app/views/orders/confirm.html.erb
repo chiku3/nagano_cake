@@ -1,48 +1,67 @@
 <p>注文情報確認</p>
 
-<table>
-  <thead>
+  <%= form_with model: @order,url: orders_path, local: true do |f| %>
+  <table>
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>単価（税込）</th>
+        <th>数量</th>
+        <th>小計</th>
+      </tr>
+    </thead>
+      <% total = 0 %>
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+      <tr>
+        <td>
+            <%= attachment_image_tag cart_item.item, :image, :fill, 40, 30, format: "jpg" %>
+            <%= cart_item.item.name %>
+        </td>
+        <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
+        <td><%= cart_item.amount %></td>
+        <td>
+            <% subtotal = cart_item.item.add_tax_price.to_i*cart_item.amount.to_i %>
+            <%= subtotal.to_s(:delimited) %>
+        </td>
+      </tr>
+        <% total += subtotal %>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <table>
     <tr>
-      <th>商品名</th>
-      <th>単価（税込）</th>
-      <th>数量</th>
-      <th>小計</th>
+      <th>送料</th>
+      <td><%= @order.shipping_cost %>
+          <%= f.hidden_field :shipping_cost %>
+      </td>
     </tr>
-  </thead>
-    <% total = 0 %>
-  <tbody>
-    <% @cart_items.each do |cart_item| %>
     <tr>
-      <td>
-          <%= attachment_image_tag cart_item.item, :image, :fill, 40, 30, format: "jpg" %>
-          <%= cart_item.item.name %>
-      </td>
-      <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
-      <td><%= cart_item.amount %></td>
-      <td>
-          <% subtotal = cart_item.item.add_tax_price.to_i*cart_item.amount.to_i %>
-          <%= subtotal.to_s(:delimited) %>
+      <th>商品合計</th>
+      <td><%= total.to_s(:delimited) %></td>
+    </tr>
+    <tr>
+      <th>請求金額</th>
+      <td><%= (@order.total_payment = (total.to_i + @order.shipping_cost)).to_s(:delimited) %>
+          <%= f.hidden_field :total_payment %>
       </td>
     </tr>
-      <% total += subtotal %>
-    <% end %>
-  </tbody>
-</table>
-
-<table>
-  <tr>
-    <th>送料</th>
-    <td>800</td>
-  </tr>
-  <tr>
-    <th>商品合計</th>
-    <td><%= total.to_s(:delimited) %></td>
-  </tr>
-  <tr>
-    <th>請求金額</th>
-    <td><%= (total.to_i + 800).to_s(:delimited) %></td>
-  </tr>
-</table>
-
-<p>支払方法</p>
-  <%= @order.payment_method
+  </table>
+  
+  <p>支払方法</p>
+    <%= @order.payment_method_i18n %>
+    <%= f.hidden_field :payment_method %>
+  
+  <p>お届け先</p>
+    <%= @order.full_address %>
+    
+    
+    <%= f.hidden_field :customer_id, :value => @customer.id %>
+    <%= f.hidden_field :postal_code %>
+    <%= f.hidden_field :address %>
+    <%= f.hidden_field :name %>
+    
+  
+  <%= f.submit"注文を確定する" %>
+  <% end %>

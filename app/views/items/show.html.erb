@@ -20,7 +20,7 @@
   <%= @item.introduction %>
   <p>¥<%= @item.add_tax_price.to_s(:delimited) %>(税込)</p>
 
-  <%= form_with model: @cart_item, url: cart_items_path, local: true, mathod: :post do |f| %>
+  <%= form_with model: @cart_item, url: cart_items_path, local: true, method: :post do |f| %>
     <%= f.select :amount, [*1..100],{include_blank:"個数選択"},{required: true} %>
     <%= f.hidden_field :item_id, :value => @item.id %>
     <%= f.hidden_field :customer_id, :value => @customer.id %>

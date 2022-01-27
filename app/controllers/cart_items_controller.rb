@@ -5,8 +5,20 @@ class CartItemsController < ApplicationController
 
   def create
     @cart_item = CartItem.new(cart_item_params)
-    @cart_item.save
-    redirect_to cart_items_path
+    # 1. 追加した商品がカート内に存在するかの判別
+    if CartItem.find_by(item_id: params[:cart_item][:item_id]).present?
+      # 存在した場合
+      # 2. カート内の個数をフォームから送られた個数分追加する 
+      cart_item = CartItem.find_by(item_id: params[:cart_item][:item_id])
+      cart_item.amount += params[:cart_item][:amount].to_i
+      cart_item.save
+      redirect_to cart_items_path
+    else  
+       # 存在しなかった場合
+      # カートモデルにレコードを新規作成する
+      @cart_item.save
+      redirect_to cart_items_path
+    end
   end
 
   def update
