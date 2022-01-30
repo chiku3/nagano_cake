@@ -29,7 +29,7 @@
       <div class="d-flex flex-row">
       <% @items.each do |item| %>
         <div class="pr-3">
-        <%= attachment_image_tag item, :image, :fill, 100, 100, format: "jpg" %></br>
+        <%= link_to attachment_image_tag(item, :image, :fill, 100, 100, format:"jpg"),item_path(item) %></br>
         <%= item.name %></br>
         ¥<%= item.add_tax_price.to_s(:delimited) %>
         </div>

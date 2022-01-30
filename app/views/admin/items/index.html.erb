@@ -1,24 +1,33 @@
-<p>商品一覧</p><%= link_to"新規登録",new_admin_item_path %>
-
-  <table>
-    <thead>
-      <tr>
-        <th>商品ID</th>
-        <th>商品名</th>
-        <th>税抜価格</th>
-        <th>ジャンル</th>
-        <th>ステータス</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @items.each do |item| %>
-      <tr>
-        <td><%= item.id %></td>
-        <td><%= link_to item.name, admin_item_path(item) %></td>
-        <td><%= item.price.to_s(:delimited) %></td>
-        <td><%= item.genre.name %></td>
-        <td>未</td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="container">
+  
+  <div class="row mb-3">
+    <p class="font-weight-bold">商品一覧</p>
+    <%= link_to"新規登録",new_admin_item_path , class:"btn btn-success btn-sm ml-auto mr-5" %>
+  </div>
+  
+  <div class="row">
+      <table class="table table-sm">
+        <thead>
+          <tr class="table-secondary">
+            <th scope="col" style="width: 15%">商品ID</th>
+            <th scope="col" style="width: 30%">商品名</th>
+            <th scope="col" style="width: 15%">税抜価格</th>
+            <th scope="col" style="width: 25%">ジャンル</th>
+            <th scope="col" style="width: 25%">ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+          <tr>
+            <td><%= item.id %></td>
+            <td><%= link_to item.name, admin_item_path(item) %></td>
+            <td><%= item.price.to_s(:delimited) %></td>
+            <td><%= item.genre.name %></td>
+            <td>未</td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
+  </div>
+ </div>
