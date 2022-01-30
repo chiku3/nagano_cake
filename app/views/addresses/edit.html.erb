@@ -1,24 +1,33 @@
-<p>配送先編集</p>
+<div class="container">
 
-  <%= form_with model:@address,url:address_path(@address), local:true do |f| %>
-
-  <div class="field">
-    <%= f.label :postal_code,"郵便番号（ハイフンなし）" %>
-    <%= f.text_field :postal_code, autofocus: true %>
+  <div class="row">
+    <p class="font-weight-bold">配送先編集</p>
   </div>
 
-  <div class="field">
-    <%= f.label :address,"住所" %>
-    <%= f.text_field :address, autofocus: true %>
+      <%= form_with model:@address,url:address_path(@address), local:true do |f| %>
+
+  <div class="form-group">
+    <div class="row d-flex flex-column">
+      <div class="field form-inline">
+        <%= f.label :postal_code,"郵便番号（ハイフンなし）",class:"form-label col-md-3" %>
+        <%= f.text_field :postal_code, autofocus: true, class:"form-control col-md-3" %>
+      </div>
+
+      <div class="field form-inline">
+        <%= f.label :address,"住所",class:"form-label col-md-3" %>
+        <%= f.text_field :address, autofocus: true, class:"form-control col-md-6" %>
+      </div>
+
+      <div class="field form-inline mt-3">
+        <%= f.label :name,"宛名",class:"form-label col-md-3" %>
+        <%= f.text_field :name, autofocus: true, class:"form-control col-md-3" %>
+      </div>
+
+        <%= f.submit "変更内容を保存", class:"btn btn-success btn-sm ml-auto mr-5" %>
+
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :name,"宛名" %>
-    <%= f.text_field :name, autofocus: true %>
-  </div>
+    <% end %>
 
-  <div class="actions">
-    <%= f.submit "変更内容を保存" %>
-  </div>
-
-<% end %>
+</div>

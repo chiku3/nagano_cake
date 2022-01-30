@@ -1,29 +1,51 @@
-<h2>ログイン</h2>
-  <p>会員の方はこちらからログイン</p>
+<div class="container">
+  <div class="row">
+  <p>ログイン</p>
+  </div>
   
-    <%= form_with model:@customer,url:customer_session_path,local:true do |f| %>
-    
-      <div class="field">
-        <%= f.label :email,"メールアドレス" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
+      <div class="row mx-0 d-flex flex-column">
+      <p>会員の方はこちらからログイン</p>
       
-      <div class="field">
-        <%= f.label :password,"パスワード" %>
-        <%= f.password_field :password, autocomplete: "current-password" %>
-      </div>
-    
-    <% if devise_mapping.rememberable? %>
-      <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
-      </div>
-    <% end %>
-    
-      <div class="actions">
-        <%= f.submit "ログイン" %>
-      </div>
-    <% end %>
+        <div class="form-group">
+        <%= form_with model:@customer,url:customer_session_path,local:true do |f| %>
+          <div class="row pl-5 d-flex flex-column">
+            
+          <div class="field form-inline">
+            <%= f.label :email,"メールアドレス",class:"form-label col-md-4" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control col-md-5" %>
+          </div>
 
-<p>会員登録がお済みでない方</p>
-  <p><%= link_to "こちら",new_customer_registration_path %>から新規登録を行ってください。</p>
+          <div class="field form-inline">
+            <%= f.label :password,"パスワード",class:"form-label col-md-4" %>
+            <%= f.password_field :password, autocomplete: "current-password", class:"form-control col-md-5" %>
+          </div>
+        
+        <div class="row mt-3">
+        <div class="offset-md-4"></div>
+        <dic class="col-md-8">
+        <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+
+          <div class="actions">
+            <%= f.submit "ログイン", class:"btn btn-primary col-md-4" %>
+          </div>
+          </div>
+          </div>
+          
+        <% end %>
+        </div>
+        
+      </div>
+    
+  <div class="row mx-0 mt-1 d-flex flex-column">
+      <p>会員登録がお済みでない方</p>
+      <div  class="row pl-5">
+      <p><%= link_to "こちら",new_customer_registration_path %>から新規登録を行ってください。</p>
+      </div>
+  </div>
+
+</div>

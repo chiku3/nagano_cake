@@ -1,44 +1,57 @@
-<p>配送先登録／一覧</p>
+<div class="container">
+
+  <div class="row">
+    <p class="font-weight-bold">配送先登録／一覧</p>
+  </div>
 
   <%= form_with model:@address,url:addresses_path, local:true do |f| %>
 
-  <div class="field">
-    <%= f.label :postal_code,"郵便番号（ハイフンなし）" %>
-    <%= f.text_field :postal_code, autofocus: true %>
-  </div>
 
-  <div class="field">
-    <%= f.label :address,"住所" %>
-    <%= f.text_field :address, autofocus: true %>
+  <div class="form-group">
+    <div class="row d-flex flex-column">
+        <div class="field form-inline">
+          <%= f.label :postal_code,"郵便番号(ハイフンなし)",class:"form-label col-md-3" %>
+          <%= f.text_field :postal_code, autofocus: true, class:"form-control col-md-3" %>
+        </div>
+  
+        <div class="field form-inline">
+          <%= f.label :address,"住所",class:"form-label col-md-3" %>
+          <%= f.text_field :address, autofocus: true, class:"form-control col-md-5" %>
+        </div>
+  
+        <div class="field form-inline mt-2">
+          <%= f.label :name,"宛名",class:"form-label col-md-3" %>
+          <%= f.text_field :name, autofocus: true, class:"form-control col-md-3" %>
+        </div>
+  
+        <%= f.submit"新規登録", class:"btn btn-success btn-sm ml-auto mr-5" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :name,"宛名" %>
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-
-  <%= f.submit"新規登録" %>
 
   <% end %>
 
-  <table>
-    <thead>
-    <tr>
-      <th>郵便番号</th>
-      <th>住所</th>
-      <th>宛名</th>
-      <th> </th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @addresses.each do |address| %>
-    <tr>
-      <td><%= address.postal_code %></td>
-      <td><%= address.address %></td>
-      <td><%= address.name %></td>
-      <td><%= link_to"編集する",edit_address_path(address) %></td>
-      <td><%= link_to"削除する",address_path(address), method: :delete %></td>
-    </tr>
-    <% end %>
-    </tbody>
-  </table>
+  <div class="row">
+      <table class="table table-bordered">
+        <thead class="table-secondary">
+        <tr>
+          <th scope="col" style="width: 15%">郵便番号</th>
+          <th scope="col" style="width: 40%">住所</th>
+          <th scope="col" style="width: 20%">宛名</th>
+          <th scope="col" style="width: 25%"> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @addresses.each do |address| %>
+        <tr>
+          <td><%= address.postal_code %></td>
+          <td><%= address.address %></td>
+          <td><%= address.name %></td>
+          <td><%= link_to"編集する",edit_address_path(address), class:"btn btn-success btn-sm" %>
+              <%= link_to"削除する",address_path(address), method: :delete, class:"btn btn-danger btn-sm" %></td>
+        </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+  </div>
+</div>
