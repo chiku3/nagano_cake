@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   def full_address
     "〒" + postal_code + "  " + address + "  " + name
   end
-  
+
   def shipping_cost
     800
   end

@@ -35,7 +35,7 @@
         </tr>
           <tr>
           <th>会員ステータス</th>
-          <td></td>
+          <td><%= @customer.is_active ? "有効" : "退会" %></td>
         </tr>
       </table>
   </div>

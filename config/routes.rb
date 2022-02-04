@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resource :customers, only:[:edit, :update]
   get 'customers/my_page' => "customers#show"
   get 'customers/unsubscribe' => "customers#unsubscribe"
-  get 'customers/withdraw' => "customers#withdraw"
+  patch 'customers/withdraw' => "customers#withdraw"
 
   resources :items, only:[:index, :show]
 

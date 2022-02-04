@@ -3,53 +3,65 @@
   <div class="row">
       <p><%= @customer.last_name+@customer.first_name %>さんの会員情報編集</p>
   </div>
-      
-  <%= form_with model:@customer,url:admin_customer_path, local:true do |f| %>
-      
-  <div class="row d-flex flex-column col-md-10">      
+
+  <%= form_with model: @customer,url:admin_customer_path, local:true do |f| %>
+
+  <div class="row d-flex flex-column col-md-10">
         <div class="field form-inline">
           <%= f.label :customer_id,"会員ID",class:"form-label col-md-3" %>
           <%=  @customer.id %>
         </div>
-        
+
         <div class="field form-inline">
           <%= f.label :last_name,"氏名",class:"form-label col-md-3" %>
           <%= f.text_field :last_name, autofocus: true, class:"form-control col-md-3 mr-3" %>
           <%= f.text_field :first_name, autofocus: true, class:"form-control col-md-3" %>
         </div>
-        
+
         <div class="field form-inline mt-2">
           <%= f.label :last_name_kana,"フリガナ",class:"form-label col-md-3" %>
           <%= f.text_field :last_name_kana, autofocus: true, class:"form-control col-md-3 mr-3" %>
           <%= f.text_field :first_name_kana, autofocus: true, class:"form-control col-md-3" %>
         </div>
-        
+
         <div class="field form-inline">
           <%= f.label :postal_code,"郵便番号",class:"form-label col-md-3" %>
           <%= f.text_field :postal_code, autofocus: true, class:"form-control col-md-3" %>
         </div>
-        
+
         <div class="field form-inline">
           <%= f.label :address,"住所",class:"form-label col-md-3" %>
           <%= f.text_field :address, autofocus: true, class:"form-control col-md-7" %>
         </div>
-        
+
         <div class="field form-inline">
           <%= f.label :telephone_number,"電話番号",class:"form-label col-md-3" %>
           <%= f.telephone_field :telephone_number, autofocus: true, class:"form-control col-md-3" %>
         </div>
-        
+
         <div class="field form-inline">
           <%= f.label :email,"メールアドレス",class:"form-label col-md-3" %>
           <%= f.email_field :email, autofocus: true, class:"form-control col-md-3" %>
         </div>
+
+        <div class="field form-inline">
+          <%= f.label :is_active,"会員ステータス",class:"form-label col-md-3" %>
+          <div class="form-check mr-4">
+          <%= f.radio_button :is_active, @customer.is_active = true %>
+          <%= f.label :is_active,"有効" %>
+          </div>
+          <div class="form-check">
+          <%= f.radio_button :is_active, @customer.is_active = false %>
+          <%= f.label :is_active,"退会" %>
+          </div>
+        </div>
   </div>
-  
-  <div class="row">      
+
+  <div class="row">
     <div class="col-md-3"></div>
         <%= f.submit "変更を保存", class:"btn btn-success btn-sm" %>
   </div>
-        
+
   <% end %>
 
 </div>

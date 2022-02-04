@@ -5,6 +5,7 @@ class CartItemsController < ApplicationController
 
   def create
     @cart_item = CartItem.new(cart_item_params)
+    
     # 1. 追加した商品がカート内に存在するかの判別
     if CartItem.find_by(item_id: params[:cart_item][:item_id]).present?
       # 存在した場合
@@ -13,11 +14,13 @@ class CartItemsController < ApplicationController
       cart_item.amount += params[:cart_item][:amount].to_i
       cart_item.save
       redirect_to cart_items_path
-    else  
+    elsif 
        # 存在しなかった場合
       # カートモデルにレコードを新規作成する
       @cart_item.save
       redirect_to cart_items_path
+    else
+      render :index
     end
   end
 
